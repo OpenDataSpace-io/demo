@@ -82,6 +82,9 @@ jobs:
   deploy:
     name: Deploy
     needs: [ build ]
+    permissions:
+      id-token: write
+      contents: read
     uses: ./.github/workflows/deploy.yml
     with:
       docker-images-version: ${{ github.sha }}
