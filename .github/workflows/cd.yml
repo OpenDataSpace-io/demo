@@ -1,8 +1,9 @@
 name: CD
-# new
 
 on:
   push:
+    branches:
+      - main
     tags:
       - '*'
   # Deploy PR if "deploy" label exists
