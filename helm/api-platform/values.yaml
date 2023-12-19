@@ -229,7 +229,7 @@ ingress:
           pathType: Prefix
           backend:
             service:
-              name: keycloak
+              name: prod-keycloak
               port:
                 number: 80
       paths:
@@ -237,7 +237,7 @@ ingress:
           pathType: Prefix
           backend:
             service:
-              name: php
+              name: prod-api-platform 
               port:
                 number: 80
   tls:
