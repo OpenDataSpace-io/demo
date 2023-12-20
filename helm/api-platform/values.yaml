@@ -106,7 +106,7 @@ keycloak:
       memory: 1Gi
       cpu: 500m
   service:
-    type: LoadBalancer
+    type: ClusterIP
     port: 80
   extraEnvVars:
     # Must set KC_HOSTNAME_URL to force https + relative path
@@ -231,7 +231,7 @@ ingress:
           pathType: Prefix
           backend:
             service:
-              name: prod-keycloak
+              name: main-keycloak
               port:
                 number: 80
       paths:
