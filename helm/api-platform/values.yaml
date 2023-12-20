@@ -107,7 +107,6 @@ keycloak:
       cpu: 500m
   service:
     type: ClusterIP
-    port: 80
   extraEnvVars:
     # Must set KC_HOSTNAME_URL to force https + relative path
     - name: KC_HOSTNAME_URL
@@ -209,8 +208,11 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-ingress:
+service:
   type: LoadBalancer
+  port: 80
+
+ingress:
   enabled: true
   className: nginx
   annotations:
