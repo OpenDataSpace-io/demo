@@ -231,16 +231,22 @@ ingress:
           backend:
             service:
               name: prod-keycloak
-              port:
-                number: 80
+              ports:
+                - port: 80
+                  targetPort: http
+                - port: 443
+                  targetPort: https
       paths:
         - path: /
           pathType: Prefix
           backend:
             service:
               name: prod-api-platform 
-              port:
-                number: 80
+              ports:
+                - port: 80
+                  targetPort: http
+                - port: 443
+                  targetPort: https
   tls:
     - secretName: demo-opendataspace-tls
       hosts:
