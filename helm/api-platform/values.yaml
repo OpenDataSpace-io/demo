@@ -212,6 +212,10 @@ service:
   type: ClusterIP
   port: 80
 
+controller:
+  service:
+    type: LoadBalancer
+
 ingress:
   enabled: true
   className: nginx
