@@ -213,8 +213,6 @@ securityContext: {}
 #  port: 80
 
 ingress:
-  type: LoadBalancer
-  port: 80
   enabled: true
   className: nginx
   annotations:
