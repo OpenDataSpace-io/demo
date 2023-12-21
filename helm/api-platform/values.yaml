@@ -225,15 +225,14 @@ ingress:
     kubernetes.io/ingress.global-static-ip-name: demo-opendataspace-ip
   hosts:
     - host: demo.opendataspace.io
-      oidcpaths:
+      paths:
         - path: /oidc/
           pathType: Prefix
           backend:
             service:
-              name: main-keycloak
+              name: prod-keycloak
               port:
                 number: 80
-      paths:
         - path: /
           pathType: Prefix
           backend:
