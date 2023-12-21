@@ -114,8 +114,16 @@ keycloak:
       https: 443
   ingress:
     enabled: true
-    host: demo.opendataspace.io
-    path: /oidc/
+    hosts:
+      - demo.opendataspace.io
+    paths:
+      - path: /oidc/
+        pathType: Prefix
+        backend:
+          service:
+            name: main-keycloak
+            port:
+              number: 80
     servicePort: http
     tls: true
   extraEnvVars:
@@ -236,14 +244,14 @@ ingress:
     kubernetes.io/ingress.global-static-ip-name: demo-opendataspace-ip
   hosts:
     - host: demo.opendataspace.io
-      oidcpaths:
-        - path: /oidc/
-          pathType: Prefix
-          backend:
-            service:
-              name: main-keycloak
-              port:
-                number: 80
+      #oidcpaths:
+      #  - path: /oidc/
+      #    pathType: Prefix
+      #    backend:
+      #      service:
+      #        name: main-keycloak
+      #        port:
+      #          number: 80
       paths:
         - path: /
           pathType: Prefix
