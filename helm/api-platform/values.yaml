@@ -107,7 +107,17 @@ keycloak:
       cpu: 500m
   service:
     type: ClusterIP
-    port: 80
+    http:
+      enabled: true
+    ports:
+      http: 80
+      https: 443
+  ingress:
+    enabled: true
+    host: demo.opendataspace.io
+    path: /oidc/
+    servicePort: http
+    tls: true
   extraEnvVars:
     # Must set KC_HOSTNAME_URL to force https + relative path
     - name: KC_HOSTNAME_URL
