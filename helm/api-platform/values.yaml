@@ -211,6 +211,23 @@ securityContext: {}
 service:
   type: LoadBalancer
   port: 80
+  hosts:
+    - demo.opendataspace.io
+  paths:
+    - path: /oidc/
+      pathType: Prefix
+      backend:
+        service:
+          name: prod-keycloak
+          port:
+            number: 80
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: prod-api-platform
+          port:
+            number: 80
 
 ingress:
   enabled: true
