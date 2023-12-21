@@ -107,27 +107,6 @@ keycloak:
       cpu: 500m
   service:
     type: ClusterIP
-    http:
-      enabled: true
-    ports:
-      http: 80
-      https: 443
-  #clusterDomain: demo.opendataspace.io
-  ingress:
-    enabled: true
-    hostname: demo.opendataspace.io
-    hosts:
-      - demo.opendataspace.io
-    paths:
-      - path: /oidc/
-        pathType: Prefix
-        backend:
-          service:
-            name: main-keycloak
-            port:
-              number: 80
-    servicePort: http
-    tls: true
   extraEnvVars:
     # Must set KC_HOSTNAME_URL to force https + relative path
     - name: KC_HOSTNAME_URL
@@ -229,11 +208,13 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-service:
-  type: LoadBalancer
-  port: 80
+#service:
+#  type: LoadBalancer
+#  port: 80
 
 ingress:
+  type: LoadBalancer
+  port: 80
   enabled: true
   className: nginx
   annotations:
@@ -246,14 +227,14 @@ ingress:
     kubernetes.io/ingress.global-static-ip-name: demo-opendataspace-ip
   hosts:
     - host: demo.opendataspace.io
-      #oidcpaths:
-      #  - path: /oidc/
-      #    pathType: Prefix
-      #    backend:
-      #      service:
-      #        name: main-keycloak
-      #        port:
-      #          number: 80
+      oidcpaths:
+        - path: /oidc/
+          pathType: Prefix
+          backend:
+            service:
+              name: main-keycloak
+              port:
+                number: 80
       paths:
         - path: /
           pathType: Prefix
