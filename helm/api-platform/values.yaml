@@ -106,7 +106,14 @@ keycloak:
       memory: 1Gi
       cpu: 500m
   service:
-    type: ClusterIP
+    type: LoadBalancer
+    ports:
+      - name: http
+        port: 80
+        targetPort: 8080
+      - name: https
+        port: 443
+        targetPort: 8443
   extraEnvVars:
     # Must set KC_HOSTNAME_URL to force https + relative path
     - name: KC_HOSTNAME_URL
@@ -211,23 +218,6 @@ securityContext: {}
 service:
   type: LoadBalancer
   port: 80
-  hosts:
-    - demo.opendataspace.io
-  paths:
-    - path: /oidc/
-      pathType: Prefix
-      backend:
-        service:
-          name: prod-keycloak
-          port:
-            number: 80
-    - path: /
-      pathType: Prefix
-      backend:
-        service:
-          name: prod-api-platform
-          port:
-            number: 80
 
 ingress:
   enabled: true
