@@ -112,8 +112,10 @@ keycloak:
     ports:
       http: 80
       https: 443
+  #clusterDomain: demo.opendataspace.io
   ingress:
     enabled: true
+    hostname: demo.opendataspace.io
     hosts:
       - demo.opendataspace.io
     paths:
