@@ -100,10 +100,11 @@ keycloak:
     tag: "0.1.0"
   resources:
     requests:
-      memory: 400Mi
-      cpu: 200m
-    limits:
       memory: 500Mi
+      cpu: 500Mi
+    limits:
+      memory: 1Gi
+      cpu: 1Gi
   service:
     type: ClusterIP
   extraEnvVars:
