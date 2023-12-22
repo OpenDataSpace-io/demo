@@ -107,6 +107,11 @@ keycloak:
       cpu: 500m
   service:
     type: ClusterIP
+    ports:
+      - port: 80
+        targetPort: 8080
+        protocol: TCP
+        name: http
   extraEnvVars:
     # Must set KC_HOSTNAME_URL to force https + relative path
     - name: KC_HOSTNAME_URL
@@ -225,20 +230,27 @@ ingress:
     kubernetes.io/ingress.global-static-ip-name: demo-opendataspace-ip
   hosts:
     - host: demo.opendataspace.io
-      oidcpaths:
-        - path: /oidc/
-          pathType: Prefix
-          backend:
-            service:
-              name: prod-keycloak
-              port:
-                number: 80
       paths:
         - path: /
           pathType: Prefix
           backend:
             service:
               name: prod-api-platform
+              port:
+                number: 80
+        - path: /pwa/
+          pathType: Prefix
+          backend:
+            service:
+              name: prod-api-platform-pwa
+              port:
+                number: 80
+      oidcpaths:
+        - path: /oidc/
+          pathType: Prefix
+          backend:
+            service:
+              name: prod-keycloak
               port:
                 number: 80
   tls:
