@@ -107,11 +107,6 @@ keycloak:
       cpu: 500m
   service:
     type: ClusterIP
-    ports:
-      - port: 80
-        targetPort: 8080
-        protocol: TCP
-        name: http
   extraEnvVars:
     # Must set KC_HOSTNAME_URL to force https + relative path
     - name: KC_HOSTNAME_URL
