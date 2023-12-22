@@ -240,6 +240,13 @@ ingress:
               name: prod-api-platform-pwa
               port:
                 number: 80
+        - path: /oidc/
+          pathType: Prefix
+          backend:
+            service:
+              name: prod-keycloak
+              port:
+                number: 80
       oidcpaths:
         - path: /oidc/
           pathType: Prefix
