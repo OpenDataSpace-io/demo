@@ -91,7 +91,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       docker-images-version: ${{ github.sha }}
-      gke-cluster: api-platform-demo
+      gke-cluster: opendataspace-demo
       gke-zone: europe-west1
     secrets:
       gke-credentials: ${{ secrets.GKE_SA_KEY }}
