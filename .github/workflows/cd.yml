@@ -3,15 +3,9 @@ name: CD
 on:
   workflow_dispatch:
     # manuell trigger
-    inputs:
-      deploy:
-        description: 'Deploy'
-        required: true
-        default: 'false'
-        # default: 'true'
   push:
-    tags:
-      - '*'
+    branches:
+      - main
   # Deploy PR if "deploy" label exists
   pull_request:
     types: [ reopened, synchronize, labeled ]
