@@ -3,6 +3,12 @@ name: CD
 on:
   workflow_dispatch:
     # manuell trigger
+    inputs:
+      deploy:
+        description: 'Deploy'
+        required: true
+        default: 'false'
+        # default: 'true'
   push:
     tags:
       - '*'
