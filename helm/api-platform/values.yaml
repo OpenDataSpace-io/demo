@@ -214,8 +214,6 @@ service:
 ingress:
   enabled: true
   className: nginx
-  name: LoadBalancer
-  type: LoadBalancer
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
@@ -228,21 +226,21 @@ ingress:
       oidcpaths:
         - path: /oidc/
           pathType: Prefix
-          backend:
-            service:
-              name: prod-keycloak
-              port:
-                number: 80
+          #backend:
+          #  service:
+          #    name: main-keycloak
+          #    port:
+          #      number: 80
       paths:
         - path: /
           pathType: Prefix
-          backend:
-            service:
-              name: prod-api-platform
-              port:
-                number: 80
+          #backend:
+          #  service:
+          #    name: main-api-platform
+          #    port:
+          #      number: 80
   tls:
-    - secretName: chart-example-tls
+    - #secretName: chart-example-tls
       hosts:
         - chart-example.local
 
