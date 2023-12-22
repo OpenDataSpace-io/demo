@@ -110,10 +110,10 @@ keycloak:
   extraEnvVars:
     # Must set KC_HOSTNAME_URL to force https + relative path
     - name: KC_HOSTNAME_URL
-      value: "https://demo.opendataspace.io/oidc/"
+      value: "https://api-platform-demo/oidc/"
     # Must set KC_HOSTNAME_ADMIN because of relative path
     - name: KC_HOSTNAME_ADMIN_URL
-      value: "https://demo.opendataspace.io/oidc/"
+      value: "https://api-platform-demo/oidc/"
     - name: KEYCLOAK_PRODUCTION
       value: "true"
   # must finish with a trailing slash (https://github.com/bitnami/charts/issues/10885#issuecomment-1414279144)
@@ -174,6 +174,7 @@ external-dns:
       memory: 200Mi
       cpu: 100m
   domainFilters:
+    - api-platform-demo
     - demo.opendataspace.io
   provider: cloudflare
   cloudflare:
@@ -224,22 +225,22 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: demo.opendataspace.io
-      paths:
-        - path: /
-          pathType: Prefix
-          # backend:
-          #  service:
-          #    name: prod-api-platform
-          #    port:
-          #      number: 80
       oidcpaths:
         - path: /oidc/
           pathType: Prefix
-      #    backend:
-      #      service:
-      #        name: prod-keycloak
-      #        port:
-      #          number: 80
+          #backend:
+          #  service:
+          #    name: main-keycloak
+          #    port:
+          #      number: 80
+      paths:
+        - path: /
+          pathType: Prefix
+          #backend:
+          #  service:
+          #    name: main-api-platform
+          #    port:
+          #      number: 80
   tls:
     - secretName: demo-opendataspace-tls
       hosts:
