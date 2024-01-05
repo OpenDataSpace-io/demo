@@ -100,7 +100,7 @@ jobs:
           echo "url=$url" >> "$GITHUB_OUTPUT"
           cors="https://$url|http://localhost|https://localhost|http://localhost:3000"
           set -o pipefail
-          helm -n ingress-nginx upgrade -i <release-name> ingress-nginx/ingress-nginx \
+          helm -n ingress-nginx upgrade -i $release ingress-nginx/ingress-nginx \
             --set=controller.replicaCount=2 \
             --create-namespace \
             --namespace=$namespace
