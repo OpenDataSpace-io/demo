@@ -85,22 +85,6 @@ jobs:
           helm dependency build ./helm/api-platform
       # Release name MUST start with a letter
       -
-        name: Deploy ingress-nginx
-        run: |
-          if [ "${{ github.event_name }}" == "push" ]; then
-            release=prod
-            namespace=$release
-            url=demo.opendataspace.io
-          else
-            release=pr-${{ github.event.pull_request.number }}
-            namespace=$release
-            url=$release-demo.opendataspace.io
-          fi
-          helm -n ingress-nginx upgrade -i $release ingress-nginx/ingress-nginx \
-              --set=controller.replicaCount=2 \
-              --create-namespace \
-              --namespace=$namespace
-      - 
         name: Deploy
         id: deploy
         run: |
