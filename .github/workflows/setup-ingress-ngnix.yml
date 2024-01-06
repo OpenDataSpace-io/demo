@@ -1,11 +1,18 @@
-name: Deploy
+name: Setup Ingress Nginx
 
 on:
-  workflow_call: 
+  workflow_dispatch:
+    inputs:
+      gke-cluster:
+        description: 'GKE cluster name'
+        required: true
+      gke-zone:
+        description: 'GKE cluster zone'
+        required: true
 
 jobs:
   deploy:
-    name: Deploy
+    name: Setup Ingress Nginx
     runs-on: ubuntu-latest
     environment:
       name: prod
